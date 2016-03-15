@@ -65,19 +65,20 @@ void SensingNode::run(){ //this function will make the node loop as long as ros:
     while(ros::ok()){
         //read from sensor
 
-        //proximity and tactile
-        vector<double>* vals=sensor->readData();
+//        //proximity and tactile
+//        vector<double>* vals=sensor->readData();
 
-        std_msgs::Float64MultiArray msg;
-        msg.data.resize(vals->size());
+//        std_msgs::Float64MultiArray msg;
+//        msg.data.resize(vals->size());
 
-        //fill in msg
-        for(int i=0;i<vals->size();i++){
-            msg.data[i]=vals->at(i);
-        }
+//        //fill in msg
+//        for(int i=0;i<vals->size();i++){
+//            msg.data[i]=vals->at(i);
+//        }
 
 #ifdef _FT17_AVAIL
         //wrist
+        //cout<<"reading wrist"<<endl;
         vector<double>* wriVals=wrist->readData();
 
         std_msgs::Float64MultiArray msgWri;
@@ -90,14 +91,14 @@ void SensingNode::run(){ //this function will make the node loop as long as ros:
 #endif
 
         //ROS_INFO("Broadcasting...");
-        tactile_pub.publish(msg);
+       // tactile_pub.publish(msg);
 #ifdef _FT17_AVAIL
         wrist_pub.publish(msgWri);
 #endif
 
         ros::spinOnce();
 
-        delete vals;
+        //delete vals;
 
         loop_rate->sleep();
     }

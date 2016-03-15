@@ -387,7 +387,7 @@ std::vector<double>* Wrist::readData(){
 
 	if(ft17==NULL){
 		return new vector<double>(WristDataNum,0);
-	}
+    }
 
     // get the FT17 data
     //ft17->get_broadcast_data ( ft_bc_data );
